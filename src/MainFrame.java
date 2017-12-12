@@ -61,8 +61,24 @@ public class MainFrame extends JFrame{
             }
         });
         jpn.add(jbtmed);
+        jbtmed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                medium med = new medium(MainFrame.this);
+                med.setVisible(true);
+                MainFrame.this.setVisible(false);
+            }
+        });
 
         jpn.add(jbtdif);
+        jbtdif.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                difficult dif = new difficult(MainFrame.this);
+                dif.setVisible(true);
+                MainFrame.this.setVisible(false);
+            }
+        });
 
         jpn.add(jbtexit);
         jbtexit.addActionListener(new ActionListener() {
