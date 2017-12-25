@@ -10,10 +10,10 @@ public class MainFrame extends JFrame{
     private int wlo = 750, hlo = 500;
 
     private JPanel jpn = new JPanel(new GridLayout(8,1,5,5));
-    private JPanel jpnn = new JPanel();
-    private JPanel jpne = new JPanel();
-    private JPanel jpns = new JPanel();
-    private JPanel jpnw = new JPanel();
+    private JPanel jpnn = new JPanel();//空值
+    private JPanel jpne = new JPanel();//空值
+    private JPanel jpns = new JPanel();//空值
+    private JPanel jpnw = new JPanel();//空值
     private JLabel jlb = new JLabel("打地鼠", SwingConstants.CENTER);
     private JLabel jlbr = new JLabel("*●+5分", SwingConstants.CENTER);
     private JLabel jlbb = new JLabel("*●-5分", SwingConstants.CENTER);
@@ -23,17 +23,22 @@ public class MainFrame extends JFrame{
     private JButton jbtdif = new JButton("困難");
     private JButton jbtexit = new JButton("EXIT");
 
+    //--------滑鼠
+    Image image   = new ImageIcon("wood.png").getImage();
+    Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image,new Point(0,0), "knock");
+
     public MainFrame(){
         initComp();
     }
     private void initComp(){
-        this.setTitle("期末專題_打地鼠遊戲");
+        this.setTitle("期末專題_打地鼠");
         this.setBounds(w/2-wlo/2,h/2-hlo/2,wlo,hlo);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         cp = this.getContentPane();
 
-        cp.add(jpn, BorderLayout.NORTH);
+        this.setCursor(cursor);
 
+        cp.add(jpnn, BorderLayout.NORTH);
         jpnn.setPreferredSize(new Dimension(wlo, 30));
         cp.add(jpn, BorderLayout.CENTER);
         cp.add(jpne, BorderLayout.EAST);
