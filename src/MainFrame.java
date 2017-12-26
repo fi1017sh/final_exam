@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class MainFrame extends JFrame{
     Container cp;
@@ -24,20 +26,158 @@ public class MainFrame extends JFrame{
     private JButton jbtexit = new JButton("EXIT");
 
     //--------滑鼠
-    Image image   = new ImageIcon("wood.png").getImage();
-    Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image,new Point(0,0), "knock");
+    private Image image   = new ImageIcon("wood.png").getImage();
+    private Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image,new Point(0,0), "knock");
+    private Image Cursor = new ImageIcon("wooddown.png").getImage();
+    private Cursor mouseCursor = Toolkit.getDefaultToolkit().createCustomCursor(Cursor,new Point(0,0), "knock");
+
 
     public MainFrame(){
         initComp();
     }
     private void initComp(){
+        //-----滑鼠改變
+        this.setCursor(cursor);
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        jbtsim.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        jbtmed.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        jbtdif.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        jbtexit.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        //-----介面設定
         this.setTitle("期末專題_打地鼠");
         this.setBounds(w/2-wlo/2,h/2-hlo/2,wlo,hlo);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         cp = this.getContentPane();
 
-        this.setCursor(cursor);
 
+        //-----頁面
         cp.add(jpnn, BorderLayout.NORTH);
         jpnn.setPreferredSize(new Dimension(wlo, 30));
         cp.add(jpn, BorderLayout.CENTER);

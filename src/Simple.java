@@ -4,10 +4,7 @@ import javafx.scene.layout.BackgroundImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +16,10 @@ public class Simple extends JFrame {
     private int imgW, imgH;
 
     //-------滑鼠
-    Image image   = new ImageIcon("wood.png").getImage();
-    Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image,new Point(0,0), "knock");
+    private Image image   = new ImageIcon("wood.png").getImage();
+    private Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(image,new Point(0,0), "knock");
+    private Image Cursor = new ImageIcon("wooddown.png").getImage();
+    private Cursor mouseCursor = Toolkit.getDefaultToolkit().createCustomCursor(Cursor,new Point(0,0), "knock");
 
     //-------頁面設定
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -47,7 +46,6 @@ public class Simple extends JFrame {
     private JButton jbs[] = new JButton[25];
     private Timer t1;
     private boolean flag = false;
-    private boolean sec = false;
     private Timer t2;
     private Timer t3;
     private Random ran = new Random();
@@ -61,6 +59,86 @@ public class Simple extends JFrame {
     }
 
     public void initComp() {
+
+        //-----滑鼠改變
+        this.setCursor(cursor);
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+
+        jbexit.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        jbstart.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setCursor(mouseCursor);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                setCursor(cursor);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        //-----介面設定
+
         imgW = jpn.getImgWidth();
         imgH = jpn.getImgHeight();
 //        this.setBounds(screenW / 2 - fmW / 2, screenH / 2 - fmH / 2, fmW, fmH);
@@ -74,26 +152,52 @@ public class Simple extends JFrame {
                 dispose();
             }
         });
-        this.setCursor(cursor);
 
+        //-----版面
         cp = this.getContentPane();
         cp.add(jpn,BorderLayout.CENTER);
         jpn.setLayout(new BorderLayout(3,3));
         jpn.add(jpset,BorderLayout.EAST);
         jpn.add(jpmou,BorderLayout.CENTER);
-
-
         jpset.setOpaque(false);
         jpmou.setOpaque(false);
 
-
+        //-----地鼠按鈕+滑鼠改變
         for(int i =0; i<25 ;i++) {
             jbs[i] = new JButton();
             jbs[i].setEnabled(flag);
             jbs[i].setOpaque(false);
             jbs[i].setBorder(null);
             jpmou.add(jbs[i]);
+            jbs[i].addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    setCursor(mouseCursor);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    setCursor(cursor);
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
+
+        //-----按鈕區設定
         jpset.add(jlt);
         jpset.add(jlbs);
         jlbs.setText(Integer.toString(s));
@@ -135,6 +239,8 @@ public class Simple extends JFrame {
             }
         });
 
+
+        //-----Timer
 
         t1 = new Timer(1000, new ActionListener() {
             @Override
