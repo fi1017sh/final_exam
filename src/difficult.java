@@ -49,7 +49,14 @@ public class difficult extends JFrame {
     private Timer t2;
     private Timer t3;
     private Random ran = new Random();
-    int x;
+    int x,y;
+    private Timer t4;
+    private Timer t5;
+
+
+    //-------彈出框
+    JFrame f=new JFrame();
+
 
 
     private MainFrame mainFrame;
@@ -59,6 +66,12 @@ public class difficult extends JFrame {
     }
 
     public void initComp() {
+        //------彈出框
+        f.setSize(0,0);
+        f.setLocationRelativeTo(null);
+        Container cp=f.getContentPane();
+        cp.setLayout(null);
+        f.setVisible(true);
 
         //-----滑鼠改變
         this.setCursor(cursor);
@@ -262,33 +275,58 @@ public class difficult extends JFrame {
                     }
                     t2.stop();
                     t3.stop();
+                    JOptionPane.showMessageDialog(f,"您獲得"+Integer.toString(sc)+"分",
+                            "得分", JOptionPane.PLAIN_MESSAGE,
+                            new ImageIcon("wood.png"));
+                    t1.stop();
                 }
             }
         });
 
-//        t2 = new Timer(2000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                x = ran.nextInt(25);
-//                jbs[x].setIcon(new ImageIcon("mousered.png"));
-//                jbs[x].addActionListener(new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                        sc+=5;
-//                        jlbsc.setText(Integer.toString(sc));
-//                        jbs[x].setIcon(new ImageIcon(""));
-//                    }
-//                });
-//            }
-//        });
-//
-//        t3 = new Timer(1995, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                jbs[x].setIcon(new ImageIcon(""));
-//            }
-//        });
+        t2 = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                x = ran.nextInt(25);
+                jbs[x].setIcon(new ImageIcon("mousered.png"));
+                jbs[x].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sc+=5;
+                        jlbsc.setText(Integer.toString(sc));
+                        jbs[x].setIcon(new ImageIcon(""));
+                    }
+                });
+            }
+        });
 
+        t3 = new Timer(1995, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jbs[x].setIcon(new ImageIcon(""));
+            }
+        });
+        t4 = new Timer(1995, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                y = ran.nextInt(25);
+                jbs[y].setIcon(new ImageIcon("mouseblue.png"));
+                jbs[y].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sc-=5;
+                        jlbsc.setText(Integer.toString(sc));
+                        jbs[y].setIcon(new ImageIcon(""));
+                    }
+                });
+            }
+        });
+
+        t5 = new Timer(1990, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jbs[y].setIcon(new ImageIcon(""));
+            }
+        });
 
     }
 
@@ -301,7 +339,7 @@ public class difficult extends JFrame {
 
         public ImagePanel() {
             try {
-                image = ImageIO.read(new File("backonee.png"));
+                image = ImageIO.read(new File("backtwo.png"));
                 imgW = image.getWidth();
                 imgH = image.getHeight();
             } catch (IOException ex) {

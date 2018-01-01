@@ -48,8 +48,13 @@ public class medium extends JFrame {
     private boolean flag = false;
     private Timer t2;
     private Timer t3;
+    private Timer t4;
+    private Timer t5;
     private Random ran = new Random();
-    int x;
+    int x,y;
+
+    //-------彈出框
+    JFrame f=new JFrame();
 
 
     private MainFrame mainFrame;
@@ -59,6 +64,12 @@ public class medium extends JFrame {
     }
 
     public void initComp() {
+        //------彈出框
+        f.setSize(0,0);
+        f.setLocationRelativeTo(null);
+        Container cp=f.getContentPane();
+        cp.setLayout(null);
+        f.setVisible(true);
 
         //-----滑鼠改變
         this.setCursor(cursor);
@@ -235,7 +246,10 @@ public class medium extends JFrame {
                     jbs[i].setContentAreaFilled(false);
                 }
                 t1.start();
-
+                t2.start();
+                t3.start();
+//                t4.start();
+//                t5.start();
             }
         });
 
@@ -248,8 +262,7 @@ public class medium extends JFrame {
                 if(s>0) {
                     s--;
                     jlbs.setText(Integer.toString(s));
-                    t2.start();
-                    t3.start();
+
                 }
                 else {
                     jlbs.setText(Integer.toString(s));
@@ -262,32 +275,47 @@ public class medium extends JFrame {
                     }
                     t2.stop();
                     t3.stop();
+                    JOptionPane.showMessageDialog(f,"您獲得"+Integer.toString(sc)+"分",
+                            "得分", JOptionPane.PLAIN_MESSAGE,
+                            new ImageIcon("wood.png"));
+                    t1.stop();
                 }
             }
         });
 
-//        t2 = new Timer(2000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                x = ran.nextInt(25);
-//                jbs[x].setIcon(new ImageIcon("mousered.png"));
-//                jbs[x].addActionListener(new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                        sc+=5;
-//                        jlbsc.setText(Integer.toString(sc));
-//                        jbs[x].setIcon(new ImageIcon(""));
-//                    }
-//                });
-//            }
-//        });
-//
-//        t3 = new Timer(1995, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                jbs[x].setIcon(new ImageIcon(""));
-//            }
-//        });
+        t2 = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                x = ran.nextInt(25);
+                jbs[x].setIcon(new ImageIcon("mousered.png"));
+                jbs[x].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sc+=5;
+                        jlbsc.setText(Integer.toString(sc));
+                        jbs[x].setIcon(new ImageIcon(""));
+                    }
+                });
+                y = ran.nextInt(25);
+                jbs[y].setIcon(new ImageIcon("mouseblue.png"));
+                jbs[y].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sc-=5;
+                        jlbsc.setText(Integer.toString(sc));
+                        jbs[y].setIcon(new ImageIcon(""));
+                    }
+                });
+            }
+        });
+
+        t3 = new Timer(1995, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jbs[x].setIcon(new ImageIcon(""));
+                jbs[y].setIcon(new ImageIcon(""));
+            }
+        });
 
 
     }
@@ -301,7 +329,7 @@ public class medium extends JFrame {
 
         public ImagePanel() {
             try {
-                image = ImageIO.read(new File("backonee.png"));
+                image = ImageIO.read(new File("backtwo.png"));
                 imgW = image.getWidth();
                 imgH = image.getHeight();
             } catch (IOException ex) {
