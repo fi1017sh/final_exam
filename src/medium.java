@@ -55,6 +55,7 @@ public class medium extends JFrame {
 
     //-------彈出框
     JFrame f=new JFrame();
+    String input;
 
 
     private MainFrame mainFrame;
@@ -70,6 +71,8 @@ public class medium extends JFrame {
         Container cp=f.getContentPane();
         cp.setLayout(null);
         f.setVisible(true);
+        input=JOptionPane.showInputDialog("請輸入姓名");
+        JOptionPane.showMessageDialog(f,"您的姓名為 : " + input);
 
         //-----滑鼠改變
         this.setCursor(cursor);
@@ -161,6 +164,9 @@ public class medium extends JFrame {
             public void windowClosing(WindowEvent e) {
                 mainFrame.setVisible(true);
                 dispose();
+                t1.stop();
+                t2.stop();
+                t3.stop();
             }
         });
 
@@ -182,9 +188,7 @@ public class medium extends JFrame {
             jpmou.add(jbs[i]);
             jbs[i].addMouseListener(new MouseListener() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
+                public void mouseClicked(MouseEvent e) { }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -197,14 +201,10 @@ public class medium extends JFrame {
                 }
 
                 @Override
-                public void mouseEntered(MouseEvent e) {
-
-                }
+                public void mouseEntered(MouseEvent e) { }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
-
-                }
+                public void mouseExited(MouseEvent e) { }
             });
         }
 
@@ -232,6 +232,9 @@ public class medium extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 mainFrame.setVisible(true);
+                t1.stop();
+                t2.stop();
+                t3.stop();
             }
         });
 
@@ -275,7 +278,7 @@ public class medium extends JFrame {
                     }
                     t2.stop();
                     t3.stop();
-                    JOptionPane.showMessageDialog(f,"您獲得"+Integer.toString(sc)+"分",
+                    JOptionPane.showMessageDialog(f,input+" :\n您獲得"+Integer.toString(sc)+"分",
                             "得分", JOptionPane.PLAIN_MESSAGE,
                             new ImageIcon("wood.png"));
                     t1.stop();

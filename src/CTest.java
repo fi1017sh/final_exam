@@ -6,14 +6,12 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 
 //public class CTest extends JLabel implements Runnable {
-//    private int frmH, frmW, x, r1, r;
+//    private int x, y, r1, r;
 //    private ImageIcon[] imgIcon = {new ImageIcon("mousered.png"),new ImageIcon("mouseblue.png")};
 //    private Random rand = new Random();
 //    private Timer t1;
 //
 //    public CTest(MainFrame frm, int frmH, int frmW){
-//        this.frmH = frmH;
-//        this.frmW = frmW;
 //        x = rand.nextInt(frmW-100);
 //        this.setIcon(imgIcon[r1=rand.nextInt(3)]);
 //        this.setBounds( x, y, this.getIcon().getIconWidth(), this.getIcon().getIconHeight() );
@@ -25,6 +23,7 @@ import java.util.Random;
 //            @Override
 //            public void mousePressed(MouseEvent e) {
 //                CTest.this.setIcon(imgIcon[r1]);
+//
 //            }
 //
 //            @Override

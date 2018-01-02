@@ -51,9 +51,11 @@ public class Simple extends JFrame {
     private Random ran = new Random();
     int x;
     private ImageIcon img = new ImageIcon("mousered.png");
+//    private JLabel[] mouse;
 
     //-------彈出框
     JFrame f=new JFrame();
+    String input;
 
     private MainFrame mainFrame;
     public Simple(MainFrame mframe){
@@ -68,6 +70,9 @@ public class Simple extends JFrame {
         Container cp=f.getContentPane();
         cp.setLayout(null);
         f.setVisible(true);
+
+        input=JOptionPane.showInputDialog("請輸入姓名");
+        JOptionPane.showMessageDialog(f,"您的姓名為 : " + input);
 
 
         //-----滑鼠改變
@@ -160,6 +165,9 @@ public class Simple extends JFrame {
             public void windowClosing(WindowEvent e) {
                 mainFrame.setVisible(true);
                 dispose();
+                t1.stop();
+                t2.stop();
+                t3.stop();
             }
         });
 
@@ -208,6 +216,32 @@ public class Simple extends JFrame {
             });
         }
 
+//        mouse[0].setLocation(1,1);
+//        mouse[1].setLocation(151,1);
+//        mouse[2].setLocation(301,1);
+//        mouse[3].setLocation(451,1);
+//        mouse[4].setLocation(601,1);
+//        mouse[5].setLocation(1,131);
+//        mouse[6].setLocation(151,131);
+//        mouse[7].setLocation(301,131);
+//        mouse[8].setLocation(451,131);
+//        mouse[9].setLocation(601,131);
+//        mouse[10].setLocation(1,261);
+//        mouse[11].setLocation(151,261);
+//        mouse[12].setLocation(301,261);
+//        mouse[13].setLocation(451,261);
+//        mouse[14].setLocation(601,261);
+//        mouse[15].setLocation(1,391);
+//        mouse[16].setLocation(151,391);
+//        mouse[17].setLocation(301,391);
+//        mouse[18].setLocation(451,391);
+//        mouse[19].setLocation(601,391);
+//        mouse[20].setLocation(1,521);
+//        mouse[21].setLocation(151,521);
+//        mouse[22].setLocation(301,521);
+//        mouse[23].setLocation(451,521);
+//        mouse[24].setLocation(601,521);
+
         //-----按鈕區設定
         jpset.add(jlt);
         jpset.add(jlbs);
@@ -232,6 +266,9 @@ public class Simple extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 mainFrame.setVisible(true);
+                t1.stop();
+                t2.stop();
+                t3.stop();
             }
         });
 
@@ -246,8 +283,7 @@ public class Simple extends JFrame {
                     jbs[i].setContentAreaFilled(false);
                 }
                 t1.start();
-                t2.start();
-                t3.start();
+
             }
         });
 
@@ -260,7 +296,9 @@ public class Simple extends JFrame {
                 if(s>0) {
                     s--;
                     jlbs.setText(Integer.toString(s));
-
+                    t2.start();
+                    if(s<59)
+                        t3.start();
                 }
                 else {
                     jlbs.setText(Integer.toString(s));
@@ -274,7 +312,7 @@ public class Simple extends JFrame {
                     }
                     t2.stop();
                     t3.stop();
-                    JOptionPane.showMessageDialog(f,"您獲得"+Integer.toString(sc)+"分",
+                    JOptionPane.showMessageDialog(f,input+" :\n您獲得"+Integer.toString(sc)+"分",
                             "得分", JOptionPane.PLAIN_MESSAGE,
                             new ImageIcon("wood.png"));
                     t1.stop();
@@ -288,7 +326,7 @@ public class Simple extends JFrame {
                 x = ran.nextInt(25);
                 jbs[x].setIcon(img);
                 for(int i=0;i<25;i++) {
-                    if (jbs[i].getIcon() !=null) {
+                    if (jbs[i].getIcon() != null) {
                         jbs[i].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -307,6 +345,7 @@ public class Simple extends JFrame {
                             }
                         });
                     }
+
                 }
 
             }
@@ -318,7 +357,27 @@ public class Simple extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for(int i=0;i<25;i++){
+                    if (jbs[i].getIcon() == img) {
+                        jbs[i].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sc -= 5;
+                                jlbsc.setText(Integer.toString(sc));
+                                jbs[x].setIcon(null);
+                            }
+                        });
+                    }
+                    else{
+                        jbs[i].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sc+=5;
+                                jlbsc.setText(Integer.toString(sc));
+                            }
+                        });
+                    }
                     jbs[i].setIcon(null);
+                    jbs[i].repaint();
                 }
             }
         });

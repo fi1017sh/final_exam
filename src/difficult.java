@@ -56,6 +56,7 @@ public class difficult extends JFrame {
 
     //-------彈出框
     JFrame f=new JFrame();
+    String input;
 
 
 
@@ -72,6 +73,9 @@ public class difficult extends JFrame {
         Container cp=f.getContentPane();
         cp.setLayout(null);
         f.setVisible(true);
+
+        input=JOptionPane.showInputDialog("請輸入姓名");
+        JOptionPane.showMessageDialog(f,"您的姓名為 : " + input);
 
         //-----滑鼠改變
         this.setCursor(cursor);
@@ -163,6 +167,11 @@ public class difficult extends JFrame {
             public void windowClosing(WindowEvent e) {
                 mainFrame.setVisible(true);
                 dispose();
+                t1.stop();
+                t2.stop();
+                t3.stop();
+                t4.stop();
+                t5.stop();
             }
         });
 
@@ -184,9 +193,7 @@ public class difficult extends JFrame {
             jpmou.add(jbs[i]);
             jbs[i].addMouseListener(new MouseListener() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
-
-                }
+                public void mouseClicked(MouseEvent e) { }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -199,14 +206,10 @@ public class difficult extends JFrame {
                 }
 
                 @Override
-                public void mouseEntered(MouseEvent e) {
-
-                }
+                public void mouseEntered(MouseEvent e) { }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
-
-                }
+                public void mouseExited(MouseEvent e) { }
             });
         }
 
@@ -234,6 +237,11 @@ public class difficult extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 mainFrame.setVisible(true);
+                t1.stop();
+                t2.stop();
+                t3.stop();
+                t4.stop();
+                t5.stop();
             }
         });
 
@@ -263,6 +271,12 @@ public class difficult extends JFrame {
                     jlbs.setText(Integer.toString(s));
                     t2.start();
                     t3.start();
+                    if(s<40){
+                        t2.stop();
+                        t3.stop();
+                        t4.start();
+                        t5.start();
+                    }
                 }
                 else {
                     jlbs.setText(Integer.toString(s));
@@ -275,9 +289,9 @@ public class difficult extends JFrame {
                     }
                     t2.stop();
                     t3.stop();
-                    JOptionPane.showMessageDialog(f,"您獲得"+Integer.toString(sc)+"分",
+                    JOptionPane.showMessageDialog(f,input+" :\n您獲得"+Integer.toString(sc)+"分",
                             "得分", JOptionPane.PLAIN_MESSAGE,
-                            new ImageIcon("wood.png"));
+                            new ImageIcon("wooddown.png"));
                     t1.stop();
                 }
             }
@@ -296,18 +310,6 @@ public class difficult extends JFrame {
                         jbs[x].setIcon(new ImageIcon(""));
                     }
                 });
-            }
-        });
-
-        t3 = new Timer(1995, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jbs[x].setIcon(new ImageIcon(""));
-            }
-        });
-        t4 = new Timer(1995, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
                 y = ran.nextInt(25);
                 jbs[y].setIcon(new ImageIcon("mouseblue.png"));
                 jbs[y].addActionListener(new ActionListener() {
@@ -321,9 +323,43 @@ public class difficult extends JFrame {
             }
         });
 
-        t5 = new Timer(1990, new ActionListener() {
+        t3 = new Timer(1995, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jbs[x].setIcon(new ImageIcon(""));
+                jbs[y].setIcon(new ImageIcon(""));
+            }
+        });
+        t4 = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                x = ran.nextInt(25);
+                jbs[x].setIcon(new ImageIcon("mousered.png"));
+                jbs[x].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sc+=5;
+                        jlbsc.setText(Integer.toString(sc));
+                        jbs[x].setIcon(new ImageIcon(""));
+                    }
+                });
+                y = ran.nextInt(25);
+                jbs[y].setIcon(new ImageIcon("mouseblue.png"));
+                jbs[y].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        sc-=5;
+                        jlbsc.setText(Integer.toString(sc));
+                        jbs[y].setIcon(new ImageIcon(""));
+                    }
+                });
+            }
+        });
+
+        t5 = new Timer(995, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jbs[x].setIcon(new ImageIcon(""));
                 jbs[y].setIcon(new ImageIcon(""));
             }
         });
