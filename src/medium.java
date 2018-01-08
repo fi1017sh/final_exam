@@ -25,38 +25,33 @@ public class medium extends JFrame {
     private Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int fmW=900,fmH=700,screenW= dim.width,screenH=dim.height;
     private Container cp;
-    private JPanel jpset = new JPanel(new GridLayout(5,2,3,3));//按扭區
+    private JPanel jpset = new JPanel(new GridLayout(5,1,3,3));//按扭區
     private JPanel jpmou = new JPanel(new GridLayout(5,5,3,3));//地鼠
 
     //-------按鈕區
-    private JLabel jlt = new JLabel("秒數");
     private int s= 60;//秒數
-    private JLabel jlbs = new JLabel();//秒數(放s)
-    private JLabel jls = new JLabel("分數");
-    private int sc = 0;//分數
-    private JLabel jlbsc = new JLabel(); //分數(放sc)
+    private JLabel jlt = new JLabel(" 秒數  "+s+"   ");
+    private int sc = 0, a = 5;//分數
+    private JLabel jls = new JLabel(" 分數  "+sc+"  ");
+
     private JLabel jlbempty = new JLabel();//空值
-    private JLabel jlbempty2 = new JLabel();//空值
-    private JLabel jlbempty3 = new JLabel();//空值
-    private JLabel jlbempty4 = new JLabel();//空值
+
     private JButton jbstart = new JButton("Start");
     private JButton jbexit = new JButton("Exit");
 
     //-------地鼠區
     private JButton jbs[] = new JButton[25];
     private Timer t1;
-    private boolean flag = false;
     private Timer t2;
     private Timer t3;
-    private Timer t4;
-    private Timer t5;
     private Random ran = new Random();
-    int x,y;
+    int x , r1;
+    private ImageIcon[] img = {new ImageIcon("mousered.png"),new ImageIcon("mouseblue.png")};
+    private Random random = new Random();
 
     //-------彈出框
     JFrame f=new JFrame();
     String input;
-
 
     private MainFrame mainFrame;
     public medium(MainFrame mframe){
@@ -71,8 +66,10 @@ public class medium extends JFrame {
         Container cp=f.getContentPane();
         cp.setLayout(null);
         f.setVisible(true);
+
         input=JOptionPane.showInputDialog("請輸入姓名");
         JOptionPane.showMessageDialog(f,"您的姓名為 : " + input);
+
 
         //-----滑鼠改變
         this.setCursor(cursor);
@@ -182,13 +179,16 @@ public class medium extends JFrame {
         //-----地鼠按鈕+滑鼠改變
         for(int i =0; i<25 ;i++) {
             jbs[i] = new JButton();
-            jbs[i].setEnabled(flag);
+            jbs[i].setIcon(null);
+            jbs[i].setEnabled(false);
             jbs[i].setOpaque(false);
             jbs[i].setBorder(null);
             jpmou.add(jbs[i]);
             jbs[i].addMouseListener(new MouseListener() {
                 @Override
-                public void mouseClicked(MouseEvent e) { }
+                public void mouseClicked(MouseEvent e) {
+
+                }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -201,32 +201,28 @@ public class medium extends JFrame {
                 }
 
                 @Override
-                public void mouseEntered(MouseEvent e) { }
+                public void mouseEntered(MouseEvent e) {
+
+                }
 
                 @Override
-                public void mouseExited(MouseEvent e) { }
+                public void mouseExited(MouseEvent e) {
+
+                }
             });
         }
-
         //-----按鈕區設定
         jpset.add(jlt);
-        jpset.add(jlbs);
-        jlbs.setText(Integer.toString(s));
-        jlt.setFont(new Font("Time New Romans", Font.BOLD, 20));
-        jlbs.setFont(new Font("Time New Romans", Font.BOLD, 32));
+        jlt.setFont(new Font("Time New Romans", Font.BOLD, 25));
+
 
         jpset.add(jls);
-        jpset.add(jlbsc);
-        jlbsc.setText(Integer.toString(sc));
-        jls.setFont(new Font("Time New Romans", Font.BOLD, 20));
-        jlbsc.setFont(new Font("Time New Romans", Font.BOLD, 32));
+        jls.setFont(new Font("Time New Romans", Font.BOLD, 25));
 
         jpset.add(jlbempty);
-        jpset.add(jlbempty2);
-        jpset.add(jlbempty3);
-        jpset.add(jlbempty4);
         jpset.add(jbstart);
         jpset.add(jbexit);
+
         jbexit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -241,21 +237,14 @@ public class medium extends JFrame {
         jbstart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                flag = true;
                 for(int i=0; i<25; i++) {
-                    jbs[i].setEnabled(flag);
                     jbs[i].setOpaque(false);
                     jbs[i].setBorder(null);
                     jbs[i].setContentAreaFilled(false);
                 }
                 t1.start();
-                t2.start();
-                t3.start();
-//                t4.start();
-//                t5.start();
             }
         });
-
 
         //-----Timer
 
@@ -264,17 +253,19 @@ public class medium extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(s>0) {
                     s--;
-                    jlbs.setText(Integer.toString(s));
-
+                    jlt.setText(" 秒數  "+s+"   ");
+                    t2.start();
+                    if(s<59)
+                        t3.start();
                 }
                 else {
-                    jlbs.setText(Integer.toString(s));
-                    flag = false;
+                    jlt.setText(Integer.toString(s));
                     for(int i=0; i<25; i++) {
-                        jbs[i].setEnabled(flag);
+                        jbs[i].setEnabled(false);
                         jbs[i].setOpaque(false);
                         jbs[i].setBorder(null);
                         jbs[i].setContentAreaFilled(false);
+                        jbs[i].setIcon(null);
                     }
                     t2.stop();
                     t3.stop();
@@ -290,36 +281,47 @@ public class medium extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 x = ran.nextInt(25);
-                jbs[x].setIcon(new ImageIcon("mousered.png"));
-                jbs[x].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        sc+=5;
-                        jlbsc.setText(Integer.toString(sc));
-                        jbs[x].setIcon(new ImageIcon(""));
+                jbs[x].setIcon(img[r1 = random.nextInt(2)]);
+                jbs[x].setEnabled(true);
+                for(int i=0;i<25;i++) {
+                    if (jbs[i].getIcon() == img[0]) {
+                        jbs[i].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sc = sc+a;
+                                jls.setText(" 分數  "+sc+"  ");
+                                jbs[x].setIcon(null);
+                                jbs[x].setEnabled(false);
+                            }
+                        });
                     }
-                });
-                y = ran.nextInt(25);
-                jbs[y].setIcon(new ImageIcon("mouseblue.png"));
-                jbs[y].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        sc-=5;
-                        jlbsc.setText(Integer.toString(sc));
-                        jbs[y].setIcon(new ImageIcon(""));
+                    else if (jbs[i].getIcon() == img[1]) {
+                        jbs[i].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sc = sc-a;
+                                jls.setText(" 分數  "+sc+"  ");
+                                jbs[x].setIcon(null);
+                                jbs[x].setEnabled(false);
+                            }
+                        });
                     }
-                });
+                }
+
             }
         });
+
+
 
         t3 = new Timer(1995, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jbs[x].setIcon(new ImageIcon(""));
-                jbs[y].setIcon(new ImageIcon(""));
+                jbs[x].setIcon(null);
+                jbs[x].repaint();
+                jbs[x].setEnabled(false);
+
             }
         });
-
 
     }
 
