@@ -71,6 +71,7 @@ public class difficult extends JFrame {
 
         //-----滑鼠改變
         this.setCursor(cursor);
+        f.setCursor(cursor);
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {}
@@ -243,6 +244,10 @@ public class difficult extends JFrame {
                     jbs[i].setContentAreaFilled(false);
                 }
                 t1.start();
+                s=60;
+                sc=0;
+                jlt.setText(" 秒數  "+s+"   ");
+                jls.setText(" 分數  "+sc+"  ");
             }
         });
 

@@ -273,6 +273,10 @@ public class medium extends JFrame {
                             "得分", JOptionPane.PLAIN_MESSAGE,
                             new ImageIcon("wood.png"));
                     t1.stop();
+                    s=60;
+                    sc=0;
+                    jlt.setText(" 秒數  "+s+"   ");
+                    jls.setText(" 分數  "+sc+"  ");
                 }
             }
         });
