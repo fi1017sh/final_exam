@@ -19,7 +19,7 @@ public class MainFrame extends JFrame{
     private JLabel jlb = new JLabel("打地鼠", SwingConstants.CENTER);
     private JLabel jlbr = new JLabel("*●+5分", SwingConstants.CENTER);
     private JLabel jlbb = new JLabel("*●-5分", SwingConstants.CENTER);
-    private JLabel jlbnot = new JLabel("*點錯格子-5分", SwingConstants.CENTER);
+    private JLabel jlbnot = new JLabel("", SwingConstants.CENTER);
     private JButton jbtsim = new JButton("簡單");
     private JButton jbtmed = new JButton("中等");
     private JButton jbtdif = new JButton("困難");

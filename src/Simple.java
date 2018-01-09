@@ -242,6 +242,10 @@ public class Simple extends JFrame {
                     jbs[i].setContentAreaFilled(false);
                 }
                 t1.start();
+                s=60;
+                sc=0;
+                jlt.setText(" 秒數  "+s+"   ");
+                jls.setText(" 分數  "+sc+"  ");
             }
         });
 
@@ -291,11 +295,11 @@ public class Simple extends JFrame {
                                 jls.setText(" 分數  "+sc+"  ");
                                 jbs[x].setIcon(null);
                                 jbs[x].setEnabled(false);
+
                             }
                         });
                     }
                 }
-
             }
         });
 
@@ -307,10 +311,18 @@ public class Simple extends JFrame {
                     jbs[x].setIcon(null);
                     jbs[x].repaint();
                     jbs[x].setEnabled(false);
+                    jbs[x].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            sc = sc-a;
+                        }
+                    });
+
             }
         });
 
     }
+
 
 
     //-----背景

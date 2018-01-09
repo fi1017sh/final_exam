@@ -155,7 +155,7 @@ public class medium extends JFrame {
 //        this.setBounds(screenW / 2 - fmW / 2, screenH / 2 - fmH / 2, fmW, fmH);
         this.setBounds(screenW / 2 - fmW / 2, screenH / 2 - fmH / 2, imgW, imgH+20);
         this.setResizable(false);//禁止縮放視窗
-        this.setTitle("簡單");
+        this.setTitle("普通");
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -319,6 +319,22 @@ public class medium extends JFrame {
                 jbs[x].setIcon(null);
                 jbs[x].repaint();
                 jbs[x].setEnabled(false);
+                if (r1==0) {
+                    jbs[x].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            sc = sc-a;
+                        }
+                    });
+                }
+                else if (r1==1) {
+                    jbs[x].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            sc = sc+a;
+                        }
+                    });
+                }
 
             }
         });

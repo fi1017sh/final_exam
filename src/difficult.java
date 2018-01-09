@@ -153,7 +153,7 @@ public class difficult extends JFrame {
 //        this.setBounds(screenW / 2 - fmW / 2, screenH / 2 - fmH / 2, fmW, fmH);
         this.setBounds(screenW / 2 - fmW / 2, screenH / 2 - fmH / 2, imgW, imgH+20);
         this.setResizable(false);//禁止縮放視窗
-        this.setTitle("簡單");
+        this.setTitle("困難");
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -282,7 +282,7 @@ public class difficult extends JFrame {
             }
         });
 
-        t2 = new Timer(1000, new ActionListener() {
+        t2 = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 x = ran.nextInt(25);
@@ -318,63 +318,80 @@ public class difficult extends JFrame {
 
 
 
-        t3 = new Timer(995, new ActionListener() {
+        t3 = new Timer(1995, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jbs[x].setIcon(null);
                 jbs[x].repaint();
                 jbs[x].setEnabled(false);
+                if (r1==0) {
+                    jbs[x].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            sc = sc-a;
+                        }
+                    });
+                }
+                else if (r1==1) {
+                    jbs[x].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            sc = sc+a;
+                        }
+                    });
+                }
 
             }
         });
 
-        t4 = new Timer(1000, new ActionListener() {
+
+        t4 = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 y = ran.nextInt(25);
-                if(y != x) {
+                if(y != x ) {
                     jbs[y].setIcon(img[r2 = random.nextInt(2)]);
                     jbs[y].setEnabled(true);
-                }
-                for(int i=0;i<25;i++) {
-                    if (jbs[i].getIcon() == img[0]) {
-                        jbs[i].addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                sc = sc+a;
-                                jls.setText(" 分數  "+sc+"  ");
-                                jbs[y].setIcon(null);
-                                jbs[y].setEnabled(false);
-                            }
-                        });
+                    for (int i = 0; i < 25; i++) {
+                        if (jbs[i].getIcon() == img[0]) {
+                            jbs[i].addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    sc = sc + a;
+                                    jls.setText(" 分數  " + sc + "  ");
+                                    jbs[y].setIcon(null);
+                                    jbs[y].setEnabled(false);
+                                }
+                            });
+                        } else if (jbs[i].getIcon() == img[1]) {
+                            jbs[i].addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    sc = sc - a;
+                                    jls.setText(" 分數  " + sc + "  ");
+                                    jbs[y].setIcon(null);
+                                    jbs[y].setEnabled(false);
+                                }
+                            });
+                        }
                     }
-                    else if (jbs[i].getIcon() == img[1]) {
-                        jbs[i].addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                sc = sc-a;
-                                jls.setText(" 分數  "+sc+"  ");
-                                jbs[y].setIcon(null);
-                                jbs[y].setEnabled(false);
-                            }
-                        });
-                    }
                 }
-
             }
         });
 
 
 
-        t5 = new Timer(995, new ActionListener() {
+        t5 = new Timer(1995, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(y != x)
                 jbs[y].setIcon(null);
                 jbs[y].repaint();
                 jbs[y].setEnabled(false);
 
             }
         });
+
 
     }
 
