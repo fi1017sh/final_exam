@@ -48,6 +48,7 @@ public class medium extends JFrame {
     int x , r1;
     private ImageIcon[] img = {new ImageIcon("mousered.png"),new ImageIcon("mouseblue.png")};
     private Random random = new Random();
+    private ImageIcon[] imghit = {new ImageIcon("hitred.png"),new ImageIcon("hitblue.png")};
 
     //-------彈出框
     JFrame f=new JFrame();
@@ -287,32 +288,27 @@ public class medium extends JFrame {
                 x = ran.nextInt(25);
                 jbs[x].setIcon(img[r1 = random.nextInt(2)]);
                 jbs[x].setEnabled(true);
-                for(int i=0;i<25;i++) {
-                    if (jbs[i].getIcon() == img[0]) {
-                        jbs[i].addActionListener(new ActionListener() {
+                    if (jbs[x].getIcon() == img[0]) {
+                        jbs[x].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 sc = sc+a;
                                 jls.setText(" 分數  "+sc+"  ");
-                                jbs[x].setIcon(null);
-                                jbs[x].setEnabled(false);
+                                jbs[x].setIcon(imghit[0]);
                             }
                         });
                     }
-                    else if (jbs[i].getIcon() == img[1]) {
-                        jbs[i].addActionListener(new ActionListener() {
+                    else if (jbs[x].getIcon() == img[1]) {
+                        jbs[x].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 sc = sc-a;
                                 jls.setText(" 分數  "+sc+"  ");
-                                jbs[x].setIcon(null);
-                                jbs[x].setEnabled(false);
+                                jbs[x].setIcon(imghit[1]);
                             }
                         });
                     }
                 }
-
-            }
         });
 
 

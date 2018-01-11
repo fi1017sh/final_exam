@@ -47,6 +47,7 @@ public class Simple extends JFrame {
     private Random ran = new Random();
     int x;
     private ImageIcon img = new ImageIcon("mousered.png");
+    private ImageIcon imghit = new ImageIcon("hitred.png");
 
     //-------彈出框
     JFrame f=new JFrame();
@@ -286,21 +287,19 @@ public class Simple extends JFrame {
                 x = ran.nextInt(25);
                 jbs[x].setIcon(img);
                 jbs[x].setEnabled(true);
-                for(int i=0;i<25;i++) {
-                    if (jbs[i].getIcon() == img) {
-                        jbs[i].addActionListener(new ActionListener() {
+                    if (jbs[x].getIcon() == img) {
+                        jbs[x].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 sc = sc+a;
                                 jls.setText(" 分數  "+sc+"  ");
-                                jbs[x].setIcon(null);
-                                jbs[x].setEnabled(false);
+                                jbs[x].setIcon(imghit);
 
                             }
                         });
                     }
                 }
-            }
+
         });
 
 

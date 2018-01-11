@@ -46,6 +46,7 @@ public class difficult extends JFrame {
     int x , r1 , y , r2 ;
     private ImageIcon[] img = {new ImageIcon("mousered.png"),new ImageIcon("mouseblue.png")};
     private Random random = new Random();
+    private ImageIcon[] imghit = {new ImageIcon("hitred.png"),new ImageIcon("hitblue.png")};
 
     //-------彈出框
     JFrame f=new JFrame();
@@ -293,32 +294,27 @@ public class difficult extends JFrame {
                 x = ran.nextInt(25);
                 jbs[x].setIcon(img[r1 = random.nextInt(2)]);
                 jbs[x].setEnabled(true);
-                for(int i=0;i<25;i++) {
-                    if (jbs[i].getIcon() == img[0]) {
-                        jbs[i].addActionListener(new ActionListener() {
+                    if (jbs[x].getIcon() == img[0]) {
+                        jbs[x].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 sc = sc+a;
                                 jls.setText(" 分數  "+sc+"  ");
-                                jbs[x].setIcon(null);
-                                jbs[x].setEnabled(false);
+                                jbs[x].setIcon(imghit[0]);
                             }
                         });
                     }
-                    else if (jbs[i].getIcon() == img[1]) {
-                        jbs[i].addActionListener(new ActionListener() {
+                    else if (jbs[x].getIcon() == img[1]) {
+                        jbs[x].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 sc = sc-a;
                                 jls.setText(" 分數  "+sc+"  ");
-                                jbs[x].setIcon(null);
-                                jbs[x].setEnabled(false);
+                                jbs[x].setIcon(imghit[1]);
                             }
                         });
                     }
                 }
-
-            }
         });
 
 
@@ -329,6 +325,10 @@ public class difficult extends JFrame {
                 jbs[x].setIcon(null);
                 jbs[x].repaint();
                 jbs[x].setEnabled(false);
+                for(int i=0;i<25;i++){
+                    jbs[i].setIcon(null);
+                    jbs[i].setEnabled(false);
+                }
                 if (r1==0) {
                     jbs[x].addActionListener(new ActionListener() {
                         @Override
@@ -350,50 +350,62 @@ public class difficult extends JFrame {
         });
 
 
-        t4 = new Timer(2000, new ActionListener() {
+        t4 = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 y = ran.nextInt(25);
                 if(y != x ) {
                     jbs[y].setIcon(img[r2 = random.nextInt(2)]);
                     jbs[y].setEnabled(true);
-                    for (int i = 0; i < 25; i++) {
-                        if (jbs[i].getIcon() == img[0]) {
-                            jbs[i].addActionListener(new ActionListener() {
+                        if (jbs[y].getIcon() == img[0]) {
+                            jbs[y].addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     sc = sc + a;
                                     jls.setText(" 分數  " + sc + "  ");
-                                    jbs[y].setIcon(null);
-                                    jbs[y].setEnabled(false);
+                                    jbs[y].setIcon(imghit[0]);
                                 }
                             });
-                        } else if (jbs[i].getIcon() == img[1]) {
-                            jbs[i].addActionListener(new ActionListener() {
+                        } else if (jbs[y].getIcon() == img[1]) {
+                            jbs[y].addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     sc = sc - a;
                                     jls.setText(" 分數  " + sc + "  ");
-                                    jbs[y].setIcon(null);
-                                    jbs[y].setEnabled(false);
+                                    jbs[y].setIcon(imghit[1]);
                                 }
                             });
                         }
                     }
                 }
-            }
         });
 
 
 
-        t5 = new Timer(1995, new ActionListener() {
+        t5 = new Timer(1495, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(y != x)
-                jbs[y].setIcon(null);
-                jbs[y].repaint();
-                jbs[y].setEnabled(false);
-
+                if(y != x) {
+                    jbs[y].setIcon(null);
+                    jbs[y].repaint();
+                    jbs[y].setEnabled(false);
+                    if (r2==0) {
+                        jbs[y].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sc = sc-a;
+                            }
+                        });
+                    }
+                    else if (r2==1) {
+                        jbs[y].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                sc = sc+a;
+                            }
+                        });
+                    }
+                }
             }
         });
 
